@@ -5,7 +5,7 @@
  */
 package co.unicauca.parqueadero.domain;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -13,8 +13,9 @@ import java.time.LocalDate;
  */
 public class costoCarro implements ICostParking{
 
+
     @Override
-    public double CalcularCosto(Vehiculo veh, LocalDate entrada, LocalDate salida) {
+    public double CalcularCosto(Vehiculo veh, LocalTime entrada, LocalTime salida) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
