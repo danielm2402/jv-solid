@@ -13,4 +13,22 @@ public class Vehiculo {
     
     private String placa;
     private EnumVehiculo tipoVehiculo;
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public EnumVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(EnumVehiculo tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
+    }
+    
+    
 }
