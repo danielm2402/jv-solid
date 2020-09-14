@@ -11,4 +11,6 @@ package co.unicauca.parqueadero.domain;
  */
 public class Vehiculo {
     
+    private String placa;
+    private EnumVehiculo tipoVehiculo;
 }

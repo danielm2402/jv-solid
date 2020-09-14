@@ -9,6 +9,7 @@ package co.unicauca.parqueadero.domain;
  *
  * @author jafes
  */
-public class EnumVehiculo {
-    
+public enum EnumVehiculo {
+    MOTO,CARRO,CAMION;
+  
 }

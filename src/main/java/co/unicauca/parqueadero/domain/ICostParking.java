@@ -5,12 +5,14 @@
  */
 package co.unicauca.parqueadero.domain;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author jafes
  */
 public interface ICostParking {
     
-    public double CalcularCosto (Vehicle veh, LocalDate )
+    public double CalcularCosto (Vehiculo veh, LocalDate entrada, LocalDate salida);
     
 }
