@@ -48,7 +48,7 @@ public class Service {
         objVehiculo= repository.getVehiculo(placa);
         return objVehiculo;
     }
-    public List<Vehiculo> listProducts() {
+    public List<Vehiculo> listVehiculos() {
         List<Vehiculo> vehicles = new ArrayList<>();
         vehicles = repository.list();;
 

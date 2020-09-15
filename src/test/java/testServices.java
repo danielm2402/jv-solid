@@ -46,19 +46,24 @@ public class testServices {
         IVehicleRepository repository = RepositoryFactory.getInstance().getRepository("default");
         Service service = new Service(repository);
 
-        Vehiculo newVehiculo = new Vehiculo("JLM12", EnumVehiculo.valueOf("MOTO"), LocalTime.parse("02:24:27"));
-        Vehiculo vh= service.getVehiculo("JLM12");
+        Vehiculo newVehiculo = new Vehiculo("ASF", EnumVehiculo.valueOf("MOTO"),LocalTime.parse("02:24:27"));
+        service.saveVehicle(newVehiculo);
+        Vehiculo vh= service.getVehiculo("ASF");
       
-        assertEquals(vh.getPlaca(),newVehiculo.getPlaca() );
+        assertEquals(vh.getPlaca(),"ASF" );
        
     }
     public void testListVehiculos() throws ParseException {
     
         IVehicleRepository repository = RepositoryFactory.getInstance().getRepository("default");
         Service service = new Service(repository);
-       List<Vehiculo> Lv= service.listProducts();
+         Vehiculo newVehiculo = new Vehiculo("TYA", EnumVehiculo.valueOf("MOTO"),LocalTime.parse("02:24:27"));
+        service.saveVehicle(newVehiculo);
+         Vehiculo newVehiculo1 = new Vehiculo("AFF", EnumVehiculo.valueOf("MOTO"),LocalTime.parse("02:24:27"));
+        service.saveVehicle(newVehiculo1);
+       List<Vehiculo> Lv= service.listVehiculos();
        
-        assertEquals(1,Lv.size() );
+        assertEquals(2,Lv.size() );
        
     }
     
