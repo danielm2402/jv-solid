@@ -50,7 +50,7 @@ public class testServices {
         ResultadoOP = 10000;
         assertNotEquals(ResultadoOP,resultado); 
         resultado = instance.CalcularCosto(newVehiculo, LocalDateTime.parse("2017-12-05T09:39:00"), LocalDateTime.parse("2017-12-05T11:10:00"));
-        ResultadoOP = 1300;
+        ResultadoOP = 1400;
         assertEquals(ResultadoOP,resultado); 
 
     }
