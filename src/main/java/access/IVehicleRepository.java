@@ -5,10 +5,14 @@
  */
 package access;
 
+import java.util.List;
+import co.unicauca.parqueadero.domain.Vehiculo;
 /**
  *
  * @author daniel2402
  */
-public class iVehicleRepository {
-    
+public interface IVehicleRepository {
+    boolean save(Vehiculo newVehiculo);
+
+    List<Vehiculo> list();
 }
