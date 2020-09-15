@@ -17,10 +17,13 @@ public class costoCamion implements ICostParking {
     public double CalcularCosto(Vehiculo veh, LocalDateTime entrada, LocalDateTime salida) {
         int varEntradaH = entrada.getHour();
         int varEntradaM = entrada.getMinute();
+        int varEntradaD = entrada.getDayOfYear();
         int varSalidaH = salida.getHour();
         int varSalidaM = salida.getMinute();
+        int varSalidaD = salida.getDayOfYear();
         int result;
         double cobroPorMinuto = 16.67;
+        
         if (varSalidaH > varEntradaH) {
             if (varSalidaM >= varEntradaM) {
                 result = (varSalidaH - varEntradaH) * 60 + (varSalidaM - varEntradaM);

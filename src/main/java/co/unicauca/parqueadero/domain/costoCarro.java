@@ -22,7 +22,7 @@ public class costoCarro implements ICostParking{
         int varEntradaM=entrada.getMinute();
         int varSalidaH=salida.getHour();
         int varSalidaM=salida.getMinute();
-        int result;
+        int result,aux;
         double cobroPorMinuto= 16.67;
         if( varSalidaH > varEntradaH  )
         {
@@ -31,12 +31,13 @@ public class costoCarro implements ICostParking{
                 if (result<=60){
                     return 2000;
                 }else{
-                    int recargo =(int) ((result-60)*8.32);
-                    int aux = (int) (recargo/100);
-                    if(aux-recargo/100>50)
-                        return recargo+100+2000;
+                    int recargo =(int) ((result-60)*cobroPorMinuto);
+                    double decimal = (double)recargo/100;
+                    if(decimal-recargo/100>0.50)
+                        return ((recargo/100)*100)+100+2000;
                     else
-                        return aux*100+2000;                 
+                        aux = (int) decimal;
+                        return (aux*100)+2000;                 
                 }
             }else{
                 varSalidaH=varSalidaH-1;
@@ -45,12 +46,13 @@ public class costoCarro implements ICostParking{
                 if (result<=60){
                     return 2000;
                 }else{
-                    int recargo =(int) ((result-60)*8.32);
-                    int aux = (int) (recargo/100);
-                    if(aux-recargo/100>50)
-                        return recargo+100+1000;
+                    int recargo =(int) ((result-60)*cobroPorMinuto);
+                    double decimal = (double)recargo/100;
+                    if(decimal-recargo/100>0.50)
+                        return ((recargo/100)*100)+100+2000;
                     else
-                        return aux*100+2000;                 
+                        aux = (int) decimal;
+                        return (aux*100)+2000;                  
                 }
             }
             

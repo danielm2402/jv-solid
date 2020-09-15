@@ -21,7 +21,7 @@ public class costoMoto implements ICostParking {
         int varEntradaM=entrada.getMinute();
         int varSalidaH=salida.getHour();
         int varSalidaM=salida.getMinute();
-        int result;
+        int result, aux;
         double cobroPorMinuto= 8.32;
         if( varSalidaH > varEntradaH  )
         {
@@ -30,12 +30,13 @@ public class costoMoto implements ICostParking {
                 if (result<=60){
                     return 1000;
                 }else{
-                    int recargo =(int) ((result-60)*8.32);
-                    double aux = (double)recargo/100;
-                    if(aux-recargo/100>0.50)
+                    int recargo =(int) ((result-60)*cobroPorMinuto);
+                    double decimal = (double)recargo/100;
+                    if(decimal-recargo/100>0.50)
                         return ((recargo/100)*100)+100+1000;
                     else
-                        return aux*100+1000;                 
+                        aux = (int) decimal;
+                        return (aux*100)+1000;                 
                 }
             }else{
                 varSalidaH=varSalidaH-1;
@@ -44,12 +45,13 @@ public class costoMoto implements ICostParking {
                 if (result<=60){
                     return 1000;
                 }else{
-                    int recargo =(int) ((result-60)*8.32);
-                    double aux = (double)recargo/100;
-                    if(aux-recargo/100>0.50)
+                    int recargo =(int) ((result-60)*cobroPorMinuto);
+                    double decimal = (double)recargo/100;
+                    if(decimal-recargo/100>0.50)
                         return ((recargo/100)*100)+100+1000;
                     else
-                        return aux*100+1000;                
+                        aux = (int) decimal;
+                        return (aux*100)+1000;                  
                 }
             }
             
