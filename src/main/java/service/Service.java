@@ -21,6 +21,13 @@ public class Service {
      public Service(IVehicleRepository repository) {
         this.repository = repository;
     }
+     /**
+      * Método que envuelve como servicio el cálculo del pago por el servicio de parking
+      * @param vehiculo vehiculo al cual calcular el total
+      * @param input    hora de entrada
+      * @param output   hora de salida
+      * @return 
+      */
     public double facturarPago(Vehiculo vehiculo, LocalDateTime input, LocalDateTime output) {
 
         //Validate product.
@@ -28,10 +35,16 @@ public class Service {
             return -1;
         }
         ICostParking delivery = fabricaVehiculo.getInstance().getCostParking(vehiculo.getTipoVehiculo());
-        return 0;
+        double total = delivery.CalcularCosto(vehiculo, input, output);
+        return total ;
        //TODO
     }
 
+    /**
+     * Servicio que envuelve el método save vehiculo de la interfaz repositorio
+     * @param newVehicle vehiculo a guardar
+     * @return true si se guardó correctamente, false sino
+     */
     public boolean saveVehicle(Vehiculo newVehicle) {
 
         //Validate product
@@ -43,11 +56,20 @@ public class Service {
         return true;
 
     }
+    /**
+     * Método que envuelve el método getVehiculo de la interfaz repository
+     * @param placa placa a buscar
+     * @return devuelve el vehiculo que corresponde a esa placa
+     */
     public Vehiculo getVehiculo(String placa){
         Vehiculo objVehiculo=new Vehiculo();
         objVehiculo= repository.getVehiculo(placa);
         return objVehiculo;
     }
+   /**
+    * Método que envuelve el método listar vehiculos de la interfaz repository
+    * @return devuelve la lista de vehiculos actuales
+    */
     public List<Vehiculo> listVehiculos() {
         List<Vehiculo> vehicles = new ArrayList<>();
         vehicles = repository.list();;

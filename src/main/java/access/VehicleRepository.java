@@ -24,10 +24,15 @@ import co.unicauca.parqueadero.domain.EnumVehiculo;
  */
 public class VehicleRepository implements IVehicleRepository {
 
+    //objeto de tipo conexión para la base de datos
      private Connection conn;
 
+     /**
+      * Método que consulta en la base de datos un vehiculo por placa
+      * @param placa placa a consultar
+      * @return el vehiculo al que corresponde la placa dada
+      */
     @Override
-    
     public Vehiculo getVehiculo(String placa) {
         Vehiculo objVehiculo = new Vehiculo();
         try{
@@ -50,9 +55,17 @@ public class VehicleRepository implements IVehicleRepository {
         return objVehiculo;
     }
 
+    /**
+     * Constructor de la clase VehicleRepository
+     */
     public VehicleRepository() {
         initDatabase();
     }
+    /**
+     * Método que guarda un vehiculo en la base de datos
+     * @param newVehiculo objeto de tipo vehiculo que se va a almacenar
+     * @return true si se guardó correctamente, false sino
+     */
     @Override
     public boolean save(Vehiculo newVehiculo) {
         try {
@@ -80,6 +93,10 @@ public class VehicleRepository implements IVehicleRepository {
         return false;
     }
 
+    /**
+     * Método que consulta a la base de datos todos los vehiculos registrados en la base de datos
+     * @return Lista de tipo Vehiculo
+     */
     @Override
     public List<Vehiculo> list() {
         List<Vehiculo> vehicles = new ArrayList<>();
@@ -107,6 +124,9 @@ public class VehicleRepository implements IVehicleRepository {
         }
         return vehicles;
     }
+    /**
+     * Método que inicia la base de datos y crea la tabla Vehicle en caso de no existir
+     */
      private void initDatabase() {
          
         // SQL statement for creating a new table
@@ -128,6 +148,9 @@ public class VehicleRepository implements IVehicleRepository {
         }
     }
 
+     /**
+      * Método que se encarga de realizar la conexión a la base de datos
+      */
     public void connect() {
         // SQLite connection string
         //String url = "jdbc:sqlite:./mydatabase.db";
@@ -142,6 +165,7 @@ public class VehicleRepository implements IVehicleRepository {
         }
     }
 
+    //Método que se encarga de cerrar la conexión a la base de datos
     public void disconnect() {
         try {
             if (conn != null) {

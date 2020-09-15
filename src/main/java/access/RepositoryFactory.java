@@ -17,6 +17,11 @@ public class RepositoryFactory {
      private RepositoryFactory() {
     
     }
+     /**
+     * Clase singleton
+     *
+     * @return la clase singleton
+     */
       public static RepositoryFactory getInstance() {
 
         if (instance == null) {
@@ -26,6 +31,11 @@ public class RepositoryFactory {
 
     }
 
+      /**
+       * Método que crea una instancia concreta de la jerarquia IVehicleRepository
+       * @param type cadena que indica qué tipo de clase hija debe instanciar
+       * @return clase hija de la abstracción IVehicleRepository
+       */
     public IVehicleRepository getRepository(String type) {
 
         IVehicleRepository result = null;
