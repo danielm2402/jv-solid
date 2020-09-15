@@ -31,9 +31,9 @@ public class costoMoto implements ICostParking {
                     return 1000;
                 }else{
                     int recargo =(int) ((result-60)*8.32);
-                    int aux = (int) (recargo/100);
-                    if(aux-recargo/100>50)
-                        return recargo+100+1000;
+                    double aux = (double)recargo/100;
+                    if(aux-recargo/100>0.50)
+                        return ((recargo/100)*100)+100+1000;
                     else
                         return aux*100+1000;                 
                 }
@@ -45,11 +45,11 @@ public class costoMoto implements ICostParking {
                     return 1000;
                 }else{
                     int recargo =(int) ((result-60)*8.32);
-                    int aux = (int) (recargo/100);
-                    if(aux-recargo/100>50)
-                        return recargo+100+1000;
+                    double aux = (double)recargo/100;
+                    if(aux-recargo/100>0.50)
+                        return ((recargo/100)*100)+100+1000;
                     else
-                        return aux*100+1000;                 
+                        return aux*100+1000;                
                 }
             }
             
