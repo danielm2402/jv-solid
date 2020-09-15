@@ -8,7 +8,7 @@ import access.IVehicleRepository;
 import co.unicauca.parqueadero.domain.ICostParking;
 import co.unicauca.parqueadero.domain.Vehiculo;
 import co.unicauca.parqueadero.domain.fabricaVehiculo;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -21,7 +21,7 @@ public class Service {
      public Service(IVehicleRepository repository) {
         this.repository = repository;
     }
-    public double facturarPago(Vehiculo vehiculo, LocalDate input, LocalDate output) {
+    public double facturarPago(Vehiculo vehiculo, LocalDateTime input, LocalDateTime output) {
 
         //Validate product.
         if (vehiculo == null) {

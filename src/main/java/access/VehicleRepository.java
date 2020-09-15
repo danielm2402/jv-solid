@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import service.Service;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import co.unicauca.parqueadero.domain.EnumVehiculo;
 /**
  *
@@ -27,6 +27,7 @@ public class VehicleRepository implements IVehicleRepository {
      private Connection conn;
 
     @Override
+    
     public Vehiculo getVehiculo(String placa) {
         Vehiculo objVehiculo = new Vehiculo();
         try{
@@ -37,7 +38,7 @@ public class VehicleRepository implements IVehicleRepository {
         while (rs.next()) {
                 objVehiculo.setPlaca(rs.getString("Placa"));
                 objVehiculo.setTipoVehiculo(EnumVehiculo.valueOf(rs.getString("Tipo")));
-                objVehiculo.setEntrada(LocalTime.parse(rs.getString("Entrada")));
+                objVehiculo.setEntrada(LocalDateTime.parse(rs.getString("Entrada")));
 
             }
          
@@ -94,7 +95,7 @@ public class VehicleRepository implements IVehicleRepository {
         
                 newVehicle.setPlaca(rs.getString("Placa"));
                 newVehicle.setTipoVehiculo(EnumVehiculo.valueOf(rs.getString("Tipo")));
-                newVehicle.setEntrada(LocalTime.parse(rs.getString("Entrada")));
+                newVehicle.setEntrada(LocalDateTime.parse(rs.getString("Entrada")));
             
                 vehicles.add(newVehicle);
             }

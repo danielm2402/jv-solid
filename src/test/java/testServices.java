@@ -18,7 +18,7 @@ import co.unicauca.parqueadero.domain.EnumVehiculo;
 import co.unicauca.parqueadero.domain.Vehiculo;
 import java.time.LocalTime;
 import service.Service;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 /**
  *
@@ -35,7 +35,7 @@ public class testServices {
         IVehicleRepository repository = RepositoryFactory.getInstance().getRepository("default");
         Service service = new Service(repository);
 
-        Vehiculo newVehiculo = new Vehiculo("JLM12", EnumVehiculo.valueOf("MOTO"), LocalTime.parse("02:24:27"));
+        Vehiculo newVehiculo = new Vehiculo("JLM12", EnumVehiculo.valueOf("MOTO"), LocalDateTime.parse("2017-12-05T11:30:30"));
         boolean save= service.saveVehicle(newVehiculo);
        
         assertEquals(true,save );
@@ -43,10 +43,10 @@ public class testServices {
     }
     public void testGetVehiculo() throws ParseException {
     
-        IVehicleRepository repository = RepositoryFactory.getInstance().getRepository("default");
+        IVehicleRepository repository = RepositoryFactory.getInstance().getRepository("2017-12-05T11:30:30");
         Service service = new Service(repository);
 
-        Vehiculo newVehiculo = new Vehiculo("ASF", EnumVehiculo.valueOf("MOTO"),LocalTime.parse("02:24:27"));
+        Vehiculo newVehiculo = new Vehiculo("ASF", EnumVehiculo.valueOf("MOTO"),LocalDateTime.parse("2017-12-05T11:30:30"));
         service.saveVehicle(newVehiculo);
         Vehiculo vh= service.getVehiculo("ASF");
       
@@ -57,9 +57,9 @@ public class testServices {
     
         IVehicleRepository repository = RepositoryFactory.getInstance().getRepository("default");
         Service service = new Service(repository);
-         Vehiculo newVehiculo = new Vehiculo("TYA", EnumVehiculo.valueOf("MOTO"),LocalTime.parse("02:24:27"));
+         Vehiculo newVehiculo = new Vehiculo("TYA", EnumVehiculo.valueOf("MOTO"),LocalDateTime.parse("2017-12-05T11:30:30"));
         service.saveVehicle(newVehiculo);
-         Vehiculo newVehiculo1 = new Vehiculo("AFF", EnumVehiculo.valueOf("MOTO"),LocalTime.parse("02:24:27"));
+         Vehiculo newVehiculo1 = new Vehiculo("AFF", EnumVehiculo.valueOf("MOTO"),LocalDateTime.parse("2017-12-05T11:30:30"));
         service.saveVehicle(newVehiculo1);
        List<Vehiculo> Lv= service.listVehiculos();
        
