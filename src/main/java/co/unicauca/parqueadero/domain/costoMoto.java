@@ -16,30 +16,32 @@ public class costoMoto implements ICostParking {
 
 
     @Override
+    
+    
     public double CalcularCosto(Vehiculo veh, LocalDateTime entrada, LocalDateTime salida) {
-        int varEntradaH=entrada.getHour();  
-        int varEntradaM=entrada.getMinute();
-        int varSalidaH=salida.getHour();
-        int varSalidaM=salida.getMinute();
+        int varEntradaH=entrada.getHour();  //int del tiempo en horas de la entrada
+        int varEntradaM=entrada.getMinute();//int del tiempo en minutos de la entrada
+        int varSalidaH=salida.getHour();//Int del tiempo en horas de la salida
+        int varSalidaM=salida.getMinute();//Int del tiempo en minutos de la salida
         int result, aux;
-        double cobroPorMinuto= 8.32;
-        if( varSalidaH > varEntradaH  )
+        double cobroPorMinuto= 8.32;//tiempo estipulado por minuto de cobro 500/60
+        if( varSalidaH > varEntradaH  )//que la hora de entrada sea menor a la de salida
         {
             if (varSalidaM >= varEntradaM){                
-                result = (varSalidaH-varEntradaH)*60+(varSalidaM-varEntradaM);
+                result = (varSalidaH-varEntradaH)*60+(varSalidaM-varEntradaM);//calcular coste de minutos adicionales
                 if (result<=60){
-                    return 1000;
+                    return 1000; //si esta por debajo de la tarifa estandar
                 }else{
                     int recargo =(int) ((result-60)*cobroPorMinuto);
-                    double decimal = (double)recargo/100;
+                    double decimal = (double)recargo/100; //redondear el numero a 100
                     if(decimal-recargo/100>0.50)
-                        return ((recargo/100)*100)+100+1000;
+                        return ((recargo/100)*100)+100+1000; //pasar los numero a enteros y aumentar ceros
                     else
                         aux = (int) decimal;
-                        return (aux*100)+1000;                 
+                        return (aux*100)+1000;     //si no hay que redondear                        
                 }
             }else{
-                varSalidaH=varSalidaH-1;
+                varSalidaH=varSalidaH-1; // si los minutos de salida son menos que lo de entrada
                 varSalidaM=varSalidaM+60;
                 result = (varSalidaH-varEntradaH)*60+(varSalidaM-varEntradaM); 
                 if (result<=60){
