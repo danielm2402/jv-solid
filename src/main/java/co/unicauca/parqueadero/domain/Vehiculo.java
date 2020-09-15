@@ -16,6 +16,14 @@ public class Vehiculo {
     private EnumVehiculo tipoVehiculo;
     private LocalTime Entrada;  
 
+    public Vehiculo(){
+        
+    }
+    public Vehiculo(String placa, EnumVehiculo tipo, LocalTime entrada){
+        this.placa=placa;
+        this.tipoVehiculo=tipo;
+        this.Entrada=entrada;
+    }
     public void setEntrada(LocalTime Entrada) {
         this.Entrada = Entrada;
     }

@@ -30,7 +30,7 @@ public class VehicleRepository implements IVehicleRepository {
     public Vehiculo getVehiculo(String placa) {
         Vehiculo objVehiculo = new Vehiculo();
         try{
-        String sql = "SELECT Placa, Tipo, Entrada FROM Vehicle where Placa="+placa;
+        String sql = "SELECT * FROM Vehicle where Placa="+placa;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()) {
@@ -39,8 +39,10 @@ public class VehicleRepository implements IVehicleRepository {
                 objVehiculo.setEntrada(LocalTime.parse(rs.getString("Entrada")));
 
             }
+         
         }
         catch (SQLException ex) {
+          
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return objVehiculo;
@@ -103,9 +105,9 @@ public class VehicleRepository implements IVehicleRepository {
      private void initDatabase() {
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS Vehicle (\n"
-                + "	Placa varchar(6) PRIMARY KEY,\n"
-                + "	Tipo varchar(10) NOT NULL,\n"
-                + "	Entrada varchar(50) NOT NULL\n"
+                + "	Placa text PRIMARY KEY,\n"
+                + "	Tipo text) NOT NULL,\n"
+                + "	Entrada text NOT NULL\n"
                 + ");";
 
         try {
