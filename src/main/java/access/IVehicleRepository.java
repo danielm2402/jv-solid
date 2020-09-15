@@ -7,16 +7,21 @@ package access;
 
 import java.util.List;
 import co.unicauca.parqueadero.domain.Vehiculo;
+
 /**
  *
  * @author daniel2402
  */
 /**
- * 
- * Inteface Del vehiculo repositorio que define los metodos save vehiculo, obtener vehiculo, y lista de vehiculos
+ *
+ * Inteface Del vehiculo repositorio que define los metodos save vehiculo,
+ * obtener vehiculo, y lista de vehiculos
  */
 public interface IVehicleRepository {
+
     boolean save(Vehiculo newVehiculo);
+
     Vehiculo getVehiculo(String placa);
+
     List<Vehiculo> list();
 }

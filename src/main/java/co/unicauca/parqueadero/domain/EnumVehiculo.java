@@ -13,13 +13,11 @@ public enum EnumVehiculo {
     MOTO("MOTO"),
     CARRO("CARRO"),
     CAMION("CAMION");
-    
+
     private final String value;
+
     EnumVehiculo(String value) {
         this.value = value;
     }
 
-   
-
-  
 }

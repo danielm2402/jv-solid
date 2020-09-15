@@ -23,7 +23,7 @@ public class costoCamion implements ICostParking {
         int varSalidaD = salida.getDayOfYear();//Dias de entrada
         int result;
         double cobroPorMinuto = 16.67;
-        
+
         if (varSalidaH > varEntradaH) {
             if (varSalidaM >= varEntradaM) {
                 result = (varSalidaH - varEntradaH) * 60 + (varSalidaM - varEntradaM);
@@ -65,5 +65,5 @@ public class costoCamion implements ICostParking {
 
         return 0;
     }
-    
+
 }

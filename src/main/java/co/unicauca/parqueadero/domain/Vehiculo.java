@@ -24,12 +24,13 @@ public class Vehiculo {
     public Vehiculo(){
         
     }
-/**
- * Constructor parametrizado de Vehiculo
- * @param placa
- * @param tipo
- * @param entrada 
- */
+    /**
+     * Constructor parametrizado de Vehiculo
+     *
+     * @param placa
+     * @param tipo
+     * @param entrada
+     */
     public Vehiculo(String placa, EnumVehiculo tipo, LocalDateTime entrada){
         this.placa=placa;
         this.tipoVehiculo=tipo;

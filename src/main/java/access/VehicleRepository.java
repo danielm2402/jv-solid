@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package access;
+
 import co.unicauca.parqueadero.domain.Vehiculo;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import service.Service;
 import java.time.LocalDateTime;
 import co.unicauca.parqueadero.domain.EnumVehiculo;
+
 /**
  *
  * @author daniel2402
@@ -25,31 +27,31 @@ import co.unicauca.parqueadero.domain.EnumVehiculo;
 public class VehicleRepository implements IVehicleRepository {
 
     //objeto de tipo conexión para la base de datos
-     private Connection conn;
+    private Connection conn;
 
-     /**
-      * Método que consulta en la base de datos un vehiculo por placa
-      * @param placa placa a consultar
-      * @return el vehiculo al que corresponde la placa dada
-      */
+    /**
+     * Método que consulta en la base de datos un vehiculo por placa
+     *
+     * @param placa placa a consultar
+     * @return el vehiculo al que corresponde la placa dada
+     */
     @Override
     public Vehiculo getVehiculo(String placa) {
         Vehiculo objVehiculo = new Vehiculo();
-        try{
-        String sql = "SELECT * FROM Vehicle where Placa ="+"'"+placa+"'";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-         
-        while (rs.next()) {
+        try {
+            String sql = "SELECT * FROM Vehicle where Placa =" + "'" + placa + "'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
                 objVehiculo.setPlaca(rs.getString("Placa"));
                 objVehiculo.setTipoVehiculo(EnumVehiculo.valueOf(rs.getString("Tipo")));
                 objVehiculo.setEntrada(LocalDateTime.parse(rs.getString("Entrada")));
 
             }
-         
-        }
-        catch (SQLException ex) {
-         
+
+        } catch (SQLException ex) {
+
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return objVehiculo;
@@ -61,8 +63,10 @@ public class VehicleRepository implements IVehicleRepository {
     public VehicleRepository() {
         initDatabase();
     }
+
     /**
      * Método que guarda un vehiculo en la base de datos
+     *
      * @param newVehiculo objeto de tipo vehiculo que se va a almacenar
      * @return true si se guardó correctamente, false sino
      */
@@ -84,17 +88,19 @@ public class VehicleRepository implements IVehicleRepository {
             pstmt.setString(3, newVehiculo.getEntrada().toString());
             pstmt.executeUpdate();
             //this.disconnect();
-            
+
             return true;
         } catch (SQLException ex) {
-           
+
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
     /**
-     * Método que consulta a la base de datos todos los vehiculos registrados en la base de datos
+     * Método que consulta a la base de datos todos los vehiculos registrados en
+     * la base de datos
+     *
      * @return Lista de tipo Vehiculo
      */
     @Override
@@ -109,26 +115,28 @@ public class VehicleRepository implements IVehicleRepository {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Vehiculo newVehicle = new Vehiculo();
-        
+
                 newVehicle.setPlaca(rs.getString("Placa"));
                 newVehicle.setTipoVehiculo(EnumVehiculo.valueOf(rs.getString("Tipo")));
                 newVehicle.setEntrada(LocalDateTime.parse(rs.getString("Entrada")));
-            
+
                 vehicles.add(newVehicle);
             }
             //this.disconnect();
 
         } catch (SQLException ex) {
-           
+
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         return vehicles;
     }
+
     /**
-     * Método que inicia la base de datos y crea la tabla Vehicle en caso de no existir
+     * Método que inicia la base de datos y crea la tabla Vehicle en caso de no
+     * existir
      */
-     private void initDatabase() {
-         
+    private void initDatabase() {
+
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS Vehicle (\n"
                 + "	Placa text PRIMARY KEY,\n"
@@ -141,16 +149,15 @@ public class VehicleRepository implements IVehicleRepository {
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
             //this.disconnect();
-             
 
         } catch (SQLException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-     /**
-      * Método que se encarga de realizar la conexión a la base de datos
-      */
+    /**
+     * Método que se encarga de realizar la conexión a la base de datos
+     */
     public void connect() {
         // SQLite connection string
         //String url = "jdbc:sqlite:./mydatabase.db";
@@ -158,7 +165,6 @@ public class VehicleRepository implements IVehicleRepository {
 
         try {
             conn = DriverManager.getConnection(url);
-                
 
         } catch (SQLException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
