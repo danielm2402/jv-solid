@@ -10,6 +10,16 @@ package co.unicauca.parqueadero.domain;
  * @author jafes
  */
 public enum EnumVehiculo {
-    MOTO,CARRO,CAMION;
+    MOTO("MOTO"),
+    CARRO("CARRO"),
+    CAMION("CAMION");
+    
+    private final String value;
+    EnumVehiculo(String value) {
+        this.value = value;
+    }
+
+   
+
   
 }

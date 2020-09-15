@@ -5,7 +5,10 @@
  */
 package service;
 import access.IVehicleRepository;
+import co.unicauca.parqueadero.domain.ICostParking;
 import co.unicauca.parqueadero.domain.Vehiculo;
+import co.unicauca.parqueadero.domain.fabricaVehiculo;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -18,12 +21,13 @@ public class Service {
      public Service(IVehicleRepository repository) {
         this.repository = repository;
     }
-    public double facturarPago(Vehiculo vehiculo) {
+    public double facturarPago(Vehiculo vehiculo, LocalDate input, LocalDate output) {
 
         //Validate product.
         if (vehiculo == null) {
-            return 0;
+            return -1;
         }
+        ICostParking delivery = fabricaVehiculo.getInstance().getCostParking(vehiculo.getTipoVehiculo());
         return 0;
        //TODO
     }
@@ -39,7 +43,11 @@ public class Service {
         return true;
 
     }
-
+    public Vehiculo getVehiculo(String placa){
+        Vehiculo objVehiculo=new Vehiculo();
+        objVehiculo= repository.getVehiculo(placa);
+        return objVehiculo;
+    }
     public List<Vehiculo> listProducts() {
         List<Vehiculo> vehicles = new ArrayList<>();
         vehicles = repository.list();;

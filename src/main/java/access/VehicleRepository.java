@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import service.Service;
+import java.time.LocalTime;
+import co.unicauca.parqueadero.domain.EnumVehiculo;
 /**
  *
  * @author daniel2402
@@ -24,23 +26,86 @@ public class VehicleRepository implements IVehicleRepository {
 
      private Connection conn;
 
+    @Override
+    public Vehiculo getVehiculo(String placa) {
+        Vehiculo objVehiculo = new Vehiculo();
+        try{
+        String sql = "SELECT Placa, Tipo, Entrada FROM Vehicle where Placa="+placa;
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+                objVehiculo.setPlaca(rs.getString("Placa"));
+                objVehiculo.setTipoVehiculo(EnumVehiculo.valueOf(rs.getString("Tipo")));
+                objVehiculo.setEntrada(LocalTime.parse(rs.getString("Entrada")));
+
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return objVehiculo;
+    }
+
     public VehicleRepository() {
         initDatabase();
     }
     @Override
     public boolean save(Vehiculo newVehiculo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            //Validate product
+            if (newVehiculo == null || newVehiculo.getPlaca().isBlank()) {
+                return false;
+            }
+            //this.connect();
+
+            String sql = "INSERT INTO Vehicle ( Placa, Tipo, Entrada ) "
+                    + "VALUES ( ?, ?, ? )";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, newVehiculo.getPlaca());
+            pstmt.setString(2, newVehiculo.getTipoVehiculo().name());
+            pstmt.setString(3, newVehiculo.getEntrada().toString());
+            pstmt.executeUpdate();
+            //this.disconnect();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
     public List<Vehiculo> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Vehiculo> vehicles = new ArrayList<>();
+        try {
+
+            String sql = "SELECT Placa, Tipo, Entrada FROM Vehicle";
+            //this.connect();
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Vehiculo newVehicle = new Vehiculo();
+        
+                newVehicle.setPlaca(rs.getString("Placa"));
+                newVehicle.setTipoVehiculo(EnumVehiculo.valueOf(rs.getString("Tipo")));
+                newVehicle.setEntrada(LocalTime.parse(rs.getString("Entrada")));
+
+                vehicles.add(newVehicle);
+            }
+            //this.disconnect();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vehicles;
     }
      private void initDatabase() {
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS Vehicle (\n"
                 + "	Placa varchar(6) PRIMARY KEY,\n"
-                + "	Tipo text NOT NULL\n"
+                + "	Tipo varchar(10) NOT NULL,\n"
+                + "	Entrada varchar(50) NOT NULL\n"
                 + ");";
 
         try {

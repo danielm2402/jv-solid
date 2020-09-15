@@ -13,6 +13,6 @@ import co.unicauca.parqueadero.domain.Vehiculo;
  */
 public interface IVehicleRepository {
     boolean save(Vehiculo newVehiculo);
-
+    Vehiculo getVehiculo(String placa);
     List<Vehiculo> list();
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.unicauca.parqueadero.domain;
+import java.time.LocalTime;
 
 /**
  *
@@ -13,6 +14,15 @@ public class Vehiculo {
     
     private String placa;
     private EnumVehiculo tipoVehiculo;
+    private LocalTime Entrada;  
+
+    public void setEntrada(LocalTime Entrada) {
+        this.Entrada = Entrada;
+    }
+
+    public LocalTime getEntrada() {
+        return Entrada;
+    }
 
     public String getPlaca() {
         return placa;
