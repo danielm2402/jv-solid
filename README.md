@@ -1,6 +1,4 @@
-# [Taller SOLID](github.com/danielm2402/jv-solid)
-
-Taller presentado en el Laboratorio De Ingeniería de Software II 
+# [Ejemplo principios solid](github.com/danielm2402/jv-solid)
 
 ## Características
 
